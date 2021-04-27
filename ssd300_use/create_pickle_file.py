@@ -46,6 +46,21 @@ for kb, bo in enumerate(p.books):
                 (ta["@ymax"] - 1) / height_normalizer,
             ]
 
+        # Make bouding boxes of text bigger to encompass more of the speech balloons
+
+        # Make 100% wider
+        x_plus = (object_description[:, 2] - object_description[:, 0]) / 2
+        # Make 50% taller
+        y_plus = (object_description[:, 3] - object_description[:, 1]) / 4
+
+        object_description[:, 2] = object_description[:, 2] + x_plus
+        object_description[:, 0] = object_description[:, 0] - x_plus
+        object_description[:, 3] = object_description[:, 3] + y_plus
+        object_description[:, 1] = object_description[:, 1] - y_plus
+
+        object_description[object_description > 1] = 1
+        object_description[object_description < 0] = 0
+
         full_path = pathlib.Path(p.img_path(book=bo, index=i))
         relative_path = pathlib.Path(*full_path.parts[parts_to_trim:])
         formatted_data.update({str(relative_path): object_description})
