@@ -19,6 +19,12 @@ Please see [manga109api](https://github.com/manga109/manga109api) as well when u
 - Bounding box cropping demo - `./extraction`
 
 
+## Scripts for use with SSD300
+
+The script `./ssd300_use/create_pickle_file.py` generates a pickle file with bounding box annotations of speech balloons in every page containing balloons. This pickle file is specifically formatted to be used in the SSD300 neural network implementation provided in https://github.com/ejuarezg/SSD300.
+
+After generating the `Manga109.pkl` file, place it in the root of the SSD300 repo.
+
 ## Citations
 When you make use of images in Manga109, please cite the following paper:
 
